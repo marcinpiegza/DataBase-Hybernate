@@ -1,7 +1,6 @@
 package repository;
 
 
-import model.City;
 import model.Country;
 
 import javax.persistence.*;
@@ -76,5 +75,77 @@ public class CountryRepository implements ICountryRepository{
             }
         }
         return languages;
+    }
+
+    @Override
+    public List<Country> showAllCountries() {
+        List<Country> countries = new ArrayList<>();
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            Query query = entityManager.createNamedQuery("County.findAll");
+            countries = query.getResultList();
+            transaction.commit();
+        } catch (Exception e) {
+            if(transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return countries;
+    }
+
+    @Override
+    public Country findTheBiggestSurfaceArea() {
+        Country country = new Country();
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            TypedQuery<Country> typedQuery = entityManager.createNamedQuery("findTheBiggestSurfaceArea", Country.class);
+            country = typedQuery.getSingleResult();
+            transaction.commit();
+        } catch (Exception e) {
+            if(transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return country ;
+    }
+
+    @Override
+    public Double findAvgLifeExpectancyInEurope() {
+        Double result = null;
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            Query query = entityManager.createNamedQuery("findAvgLifeExpectancyInEurope");
+            result = (Double) query.getSingleResult();
+            transaction.commit();
+        } catch (Exception e) {
+            if(transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<Country> findAllWithOfficialEnglish() {
+        List<Country> countries = new ArrayList<>();
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            Query query = entityManager.createNamedQuery("findAllWithOfficialEnglish");
+            countries = query.getResultList();
+            transaction.commit();
+        } catch (Exception e) {
+            if(transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return countries;
     }
 }

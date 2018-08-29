@@ -7,11 +7,11 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "County.findAll",
                 query = "select c from Country c"),
-        @NamedQuery(name = "findTheBiggest (SurfaceArea)",
-                query = "select max(c.surfaceArea) FROM Country c"),
+        @NamedQuery(name = "findTheBiggestSurfaceArea",
+                query = "SELECT c FROM Country c ORDER BY c.surfaceArea DESC "),
         @NamedQuery(name = "findAvgLifeExpectancyInEurope",
                 query = "select avg (c.surfaceArea) FROM Country c"),
-        @NamedQuery(name = ".findAllWithOfficialEnglish ",
+        @NamedQuery(name = "findAllWithOfficialEnglish",
                 query = "select c FROM Country c INNER JOIN c.languages l where l.isOfficial ='T' AND l.language = 'English'"),
                 })
 

@@ -1,6 +1,5 @@
 package repository;
 
-import model.City;
 import model.Country;
 
 import java.util.List;
@@ -12,4 +11,13 @@ public interface ICountryRepository {
     Country findCountryToCity(String City) ;
 
     List<Country> findCountryOnLanguage(String language);
+
+    List<Country> showAllCountries();
+
+    Country findTheBiggestSurfaceArea();
+
+    Double findAvgLifeExpectancyInEurope();
+
+    List<Country> findAllWithOfficialEnglish();
+
 }

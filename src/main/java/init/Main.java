@@ -67,6 +67,11 @@ public class Main {
                             state = State.TENOPTION;
                             break;
                         }
+
+                        case ("11"): {
+                            state = State.STOP;
+                            break;
+                        }
                         default:
                             MenuView.showMenuWrontAnswer();
                             state = State.INIT;
@@ -74,7 +79,7 @@ public class Main {
                     }
                     break;
                 }
-                     //countryOption
+                //countryOption
                 case ONEOPTION: {
                     OptionView.CountryAskAboutRange();
                     OptionView.CountryAskAboutRangeMin();
@@ -111,7 +116,6 @@ public class Main {
                     String city = sc.next();
                     Country country = new Country();
                     country = countryRepository.findCountryToCity(city);
-                    country.getName().toString();
                     System.out.println(country.getName());
                     MenuView.separator();
                     state = State.INIT;
@@ -158,40 +162,47 @@ public class Main {
                 }
 
                 case SEVENOPTION: {
-                    //TODO
+                    List<Country> countries = new ArrayList<>();
+                    countries = countryRepository.showAllCountries();
+                    for (Country con : countries) {
+                        System.out.println(con.getName());
+                    }
                     MenuView.separator();
                     state = State.INIT;
                     break;
                 }
 
                 case EIGHTOPTION: {
-                    //TODO
+                    Country country = new Country();
+                    country = countryRepository.findTheBiggestSurfaceArea();
+                    System.out.println(country.getName());
                     MenuView.separator();
                     state = State.INIT;
                     break;
                 }
 
                 case NINEOPTION: {
-                    //TODO
+                    Double result = null;
+                    result = countryRepository.findAvgLifeExpectancyInEurope();
+                    System.out.println(result);
                     MenuView.separator();
                     state = State.INIT;
                     break;
                 }
 
                 case TENOPTION: {
-                    //TODO
+                    List<Country> countries = new ArrayList<>();
+                    countries = countryRepository.findAllWithOfficialEnglish();
+                    for (Country con : countries) {
+                        System.out.println(con.getName());
+                    }
                     MenuView.separator();
                     state = State.INIT;
                     break;
                 }
-
             }
 
         }
-
-//countryRepository.findCountryOnLanguage();
-        // countryRepository.findCountryToCity();
-
     }
 }
 
