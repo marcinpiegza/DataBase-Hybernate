@@ -20,4 +20,5 @@ public interface ICountryRepository {
 
     List<Country> findAllWithOfficialEnglish();
 
+    Country findCountryTheBiggestSurfaceArea(Integer surface);
 }

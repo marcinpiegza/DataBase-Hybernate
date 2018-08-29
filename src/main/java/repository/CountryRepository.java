@@ -97,20 +97,20 @@ public class CountryRepository implements ICountryRepository{
 
     @Override
     public Country findTheBiggestSurfaceArea() {
-        Country country = new Country();
+        Country surface = null;
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
             TypedQuery<Country> typedQuery = entityManager.createNamedQuery("findTheBiggestSurfaceArea", Country.class);
-            country = typedQuery.getSingleResult();
+            surface = typedQuery.getResultList().get(0);
             transaction.commit();
         } catch (Exception e) {
             if(transaction != null) {
                 transaction.rollback();
             }
         }
-        return country ;
+        return surface;
     }
 
     @Override
@@ -147,5 +147,29 @@ public class CountryRepository implements ICountryRepository{
             }
         }
         return countries;
+    }
+
+
+
+
+    @Override
+    public Country findCountryTheBiggestSurfaceArea(Integer integer) {
+        Country country = new Country();
+        Double surface =  Double.valueOf(integer);
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            String query = "SELECT co from Country co  where co.surfaceArea = :surface";
+            TypedQuery<Country> typedQuery = entityManager.createQuery(query,Country.class);
+            typedQuery.setParameter("surface",surface);
+            country = typedQuery.getSingleResult();
+            transaction.commit();
+        } catch (Exception e) {
+            if(transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return country;
     }
 }

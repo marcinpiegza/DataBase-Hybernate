@@ -173,9 +173,11 @@ public class Main {
                 }
 
                 case EIGHTOPTION: {
+                    Country surface = null;
+                    surface = countryRepository.findTheBiggestSurfaceArea();
                     Country country = new Country();
-                    country = countryRepository.findTheBiggestSurfaceArea();
-                    System.out.println(country.getName());
+                   // country = countryRepository.findCountryTheBiggestSurfaceArea(surface);
+                    System.out.println(surface.getName());
                     MenuView.separator();
                     state = State.INIT;
                     break;
