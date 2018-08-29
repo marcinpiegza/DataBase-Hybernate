@@ -9,7 +9,7 @@ public interface ICityRepository {
 
     List<City> findCityToDistrict(String district );
 
-    City findCountryToCountry(String country) ;
+    List<City> findCountryToCountry(String country) ;
 
     List <City> findCityToOfficialLanguage (String language);
 

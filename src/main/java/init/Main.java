@@ -93,7 +93,6 @@ public class Main {
                 }
 
                 case TWOOPTION: {
-                    //TODO
                     OptionView.CountryAskAboutLanguage();
                     String language = sc.next();
 
@@ -108,7 +107,6 @@ public class Main {
                 }
 
                 case THREEOPTION: {
-                    //TODO
                     OptionView.CountryAskAboutCity();
                     String city = sc.next();
                     Country country = new Country();
@@ -122,7 +120,6 @@ public class Main {
 
                 //city option
                 case FOUROPTION: {
-                    //TODO
                     OptionView.CityAskAboutDistrict();
                     String district = sc.next();
                     List<City> city = new ArrayList<>();
@@ -137,14 +134,17 @@ public class Main {
 
                 case FIVEOPTION: {
                     OptionView.CityAskAboutCoutry();
-                    //TODO
+                    String country = sc.next();
+                    List<City> cities = new ArrayList<>();
+                    cities = cityRepository.findCountryToCountry(country);
+                    for (City cit : cities) {
+                        System.out.println(cit.getName());
+                    }
                     MenuView.separator();
                     state = State.INIT;
                     break;
                 }
-
                 case SIXOPTION: {
-                    //TODO
                     OptionView.CountryAskAboutLanguage();
                     String language = sc.next();
                     List<City> city = new ArrayList<>();
@@ -188,7 +188,6 @@ public class Main {
             }
 
         }
-
 
 //countryRepository.findCountryOnLanguage();
         // countryRepository.findCountryToCity();

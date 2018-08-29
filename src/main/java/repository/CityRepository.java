@@ -26,9 +26,10 @@ public class CityRepository implements ICityRepository {
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            Query query = entityManager.createQuery("select cit from City cit INNER JOIN cit.countryCode c where c.name = :name");
-            query.setParameter("name",district);
-            city = query.getResultList();
+            String query = ("select cit from City cit where cit.district = :name");
+            TypedQuery<City> typedQuery = entityManager.createQuery(query,City.class);
+            typedQuery.setParameter("name",district);
+            city = typedQuery.getResultList();
             transaction.commit();
         } catch (Exception e) {
             if(transaction != null) {
@@ -39,24 +40,23 @@ public class CityRepository implements ICityRepository {
     }
 
     @Override
-    public City findCountryToCountry(String country) {
-        City city = new City();
+    public List<City> findCountryToCountry(String country) {
+        List<City> cities = new ArrayList<>();
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            Query query = entityManager.createQuery("select cit from City cit INNER JOIN cit.countryCode c where c.name = :name");
-            //lub inaczej bez rzutowania
-            //TypedQuery<City> query2 = entityManager.createQuery("select cit from City cit INNER JOIN cit.countryCode c where c.name = :name",City.class);
-            query.setParameter("name",country);
-            city = (City) query.getSingleResult();
+            String query = ("select cit from City cit INNER JOIN cit.countryCode c where c.name = :name");
+            TypedQuery<City> typeQuery = entityManager.createQuery(query,City.class);
+            typeQuery.setParameter("name",country);
+            cities = typeQuery.getResultList();
             transaction.commit();
         } catch (Exception e) {
             if(transaction != null) {
                 transaction.rollback();
             }
         }
-        return city;
+        return cities;
     }
 
     @Override
@@ -66,9 +66,10 @@ public class CityRepository implements ICityRepository {
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            Query query = entityManager.createQuery("select cit from City cit INNER JOIN cit.languages l where l.name = :name");
-            query.setParameter("name",language);
-            cities = query.getResultList();
+            String query = ("select c from City c INNER JOIN c.countryCode cc INNER JOIN cc.languages ccc where ccc.language = :name");
+            TypedQuery<City> typedQuery = entityManager.createQuery(query,City.class);
+            typedQuery.setParameter("name",language);
+            cities = typedQuery.getResultList();
             transaction.commit();
         } catch (Exception e) {
             if(transaction != null) {
@@ -76,5 +77,24 @@ public class CityRepository implements ICityRepository {
             }
         }
         return cities;
+    }
+
+    public List<Country> findCountryOnLanguage(String language){
+        List<Country> languages = new ArrayList<>();
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            String query = ("select co from Country co INNER JOIN co.languages l where l.language = :name");
+            TypedQuery<Country> typedQuery = entityManager.createQuery(query, Country.class);
+            typedQuery.setParameter("name", language);
+            languages = typedQuery.getResultList();
+            transaction.commit();
+        } catch (Exception e) {
+            if(transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return languages;
     }
 }
