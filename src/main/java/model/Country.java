@@ -57,7 +57,7 @@ import java.util.List;
         private String code2;
 
         @OneToMany(mappedBy = "countryCode")
-        private List<City>cities;
+        private List<City> cities;
 
         @OneToMany(mappedBy = "countryCode")
         private List<CountryLanguage>languages;

@@ -87,6 +87,7 @@ public class Main {
                     for (Country co : country) {
                         System.out.println(co.getName());
                     }
+                    MenuView.separator();
                     state = State.INIT;
                     break;
                 }
@@ -101,6 +102,7 @@ public class Main {
                     for (Country co : country) {
                         System.out.println(co.getName());
                     }
+                    MenuView.separator();
                     state = State.INIT;
                     break;
                 }
@@ -113,6 +115,7 @@ public class Main {
                     country = countryRepository.findCountryToCity(city);
                     country.getName().toString();
                     System.out.println(country.getName());
+                    MenuView.separator();
                     state = State.INIT;
                     break;
                 }
@@ -127,6 +130,7 @@ public class Main {
                     for (City cit : city) {
                         System.out.println(cit.getName());
                     }
+                    MenuView.separator();
                     state = State.INIT;
                     break;
                 }
@@ -134,6 +138,7 @@ public class Main {
                 case FIVEOPTION: {
                     OptionView.CityAskAboutCoutry();
                     //TODO
+                    MenuView.separator();
                     state = State.INIT;
                     break;
                 }
@@ -147,30 +152,35 @@ public class Main {
                     for (City cit : city) {
                         System.out.println(cit.getName());
                     }
+                    MenuView.separator();
                     state = State.INIT;
                     break;
                 }
 
                 case SEVENOPTION: {
                     //TODO
+                    MenuView.separator();
                     state = State.INIT;
                     break;
                 }
 
                 case EIGHTOPTION: {
                     //TODO
+                    MenuView.separator();
                     state = State.INIT;
                     break;
                 }
 
                 case NINEOPTION: {
                     //TODO
+                    MenuView.separator();
                     state = State.INIT;
                     break;
                 }
 
                 case TENOPTION: {
                     //TODO
+                    MenuView.separator();
                     state = State.INIT;
                     break;
                 }

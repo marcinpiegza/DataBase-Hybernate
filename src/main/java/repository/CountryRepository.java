@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CountryRepository implements ICountryRepository{
 
     private EntityManagerFactory managerFactory;
@@ -25,7 +26,7 @@ public class CountryRepository implements ICountryRepository{
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            Query query = entityManager.createQuery("SELECT co WHERE co.population between :min and :max");
+            Query query = entityManager.createQuery("SELECT co from Country co WHERE co.population between :min and :max");
             query.setParameter("min", min);
             query.setParameter("max", max);
             country= query.getResultList();
@@ -64,9 +65,10 @@ public class CountryRepository implements ICountryRepository{
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            Query query = entityManager.createQuery("select co from Country co INNER JOIN co.languages l where l.name = :name");
-           query.setParameter("name",language);
-            languages = query.getResultList();
+            String query = ("select co from Country co INNER JOIN co.languages l where l.language = :name");
+            TypedQuery<Country> typedQuery = entityManager.createQuery(query, Country.class);
+            typedQuery.setParameter("name", language);
+            languages = typedQuery.getResultList();
             transaction.commit();
         } catch (Exception e) {
             if(transaction != null) {
